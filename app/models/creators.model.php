@@ -9,17 +9,6 @@ class creatorsModel extends Model {
     $this->fields = array("id", "name", "profile_link");
   }
 
-  public function getCreatorById($id) {
-    $query = $this->db->prepare('select * from creators where id = ?');
-    $result = $this->executeQueryWithParams($query, [$id]);
-    if (!empty($result)) return $result[0];
-  }
-
-  public function getCreators() {
-    $query = $this->db->prepare('select * from creators');
-    $result = $this->executeQuery($query);
-    return $result;
-  }
 
   public function create($data) {
     extract($data);

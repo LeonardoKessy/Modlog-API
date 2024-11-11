@@ -9,24 +9,6 @@ class categoriesModel extends Model {
     $this->fields = array("id", "id_game", "name");
   }
 
-  public function getCategoryById($id) {
-    $query = $this->db->prepare('select * from categories where id = ?');
-    $result = $this->executeQueryWithParams($query, [$id]);
-    if (!empty($result)) return $result[0];
-  }
-
-  public function getCategoriesByGame($game_id) {
-    $query = $this->db->prepare('select * from categories where id_game = ?');
-    $result = $this->executeQueryWithParams($query, [$game_id]);
-    return $result;
-  }
-
-  public function getCategories() {
-    $query = $this->db->prepare('select * from categories');
-    $result = $this->executeQuery($query);
-    return $result;
-  }
-
   public function create($data) {
     extract($data);
     $query = $this->db->prepare("INSERT INTO categories(name, id_game) VALUES (:name, :id_game)");
