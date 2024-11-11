@@ -9,17 +9,6 @@ class gamesModel extends Model {
     $this->fields = array("id", "name", "description", "image");
   }
 
-  public function getGames() {
-    $query = $this->db->prepare('select * from games');
-    return $this->executeQuery($query);
-  }
-
-  public function getGameById($game_id) {
-    $query = $this->db->prepare('select * from games where id = ?');
-    $result = $this->executeQueryWithParams($query, [$game_id]);
-    if (!empty($result)) return $result[0];
-  }
-
   public function create($data) {
     extract($data);
     $query = $this->db->prepare("INSERT INTO games(name, description, image) VALUES (:name, :description, :image)");
