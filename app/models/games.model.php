@@ -5,6 +5,8 @@ class gamesModel extends Model {
   
   public function __construct() {
     parent::__construct();
+    $this->table = "games";
+    $this->fields = array("id", "name", "description", "image");
   }
 
   public function getGames() {

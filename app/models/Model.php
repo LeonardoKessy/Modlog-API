@@ -2,6 +2,8 @@
 
 class Model {
   protected $db;
+  public $table = "";
+  public $fields = [];
 
   public function __construct() {
     try {
@@ -12,15 +14,56 @@ class Model {
     $this->deploy();
   }
 
-  public function executeQuery($query) {
+  public function getAll($orderBy = false, $order = false, $wheres =[], $page = 1, $limit = 0) {  
+    $sql = "SELECT * FROM $this->table";
+
+    $isFirst = true;
+    foreach ($wheres as $key => $value) {
+      if ($isFirst) $sql .= " WHERE ";
+      else $sql .= " AND ";
+      $sql .= "$key = '$value'";
+      $isFirst = false;
+    }
+
+    if (in_array($orderBy, $this->fields)) { 
+      $sql .= " ORDER BY $orderBy ";
+      switch ($order) {
+        case 'DESC': $sql .='DESC'; break;
+        default: $sql .= 'ASC'; break;
+      }
+    }
+
+    if ($limit != 0) {
+      $offset = ($page -1) * $limit;
+      $sql .= " LIMIT $offset, $limit";
+    }
+
+    $query = $this->executeQuery($sql);
+    $results = $query->fetchAll(PDO::FETCH_OBJ);
+    return $results;
+  }
+
+  public function get($id) {
+    $sql = "SELECT * FROM $this->table WHERE id = $id";
+
+    $query = $this->executeQuery($sql);
+    $result = $query->fetch(PDO::FETCH_OBJ);
+    return $result;
+  }
+
+
+  public function executeQuery($sql) {
+    $query = $this->db->prepare($sql);
     $query->execute();
-    return $query->fetchAll(PDO::FETCH_OBJ);
+    return $query;
   }
 
   public function executeQueryWithParams($query, $params) {
+    $query = $this->db->prepare($query);
     $query->execute($params);
-    return $query->fetchAll(PDO::FETCH_OBJ);
+    return $query;
   }
+
 
   public function createDB() {
     $sql_connection = "mysql:host=". MYSQL_HOST .";charset=utf8mb4";

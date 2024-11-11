@@ -5,6 +5,8 @@ class creatorsModel extends Model {
 
   public function __construct() {
     parent::__construct();
+    $this->table = "creators";
+    $this->fields = array("id", "name", "profile_link");
   }
 
   public function getCreatorById($id) {

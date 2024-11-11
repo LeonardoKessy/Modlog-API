@@ -5,6 +5,8 @@ class categoriesModel extends Model {
   
   public function __construct() {
     parent::__construct();
+    $this->table = "categories";
+    $this->fields = array("id", "id_game", "name");
   }
 
   public function getCategoryById($id) {

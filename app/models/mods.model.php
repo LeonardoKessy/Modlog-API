@@ -5,6 +5,14 @@ class modsModel extends Model {
   
   public function __construct() {
     parent::__construct();
+    $this->table = "mods";
+    $this->fields = array("id", "game_id", "category_id", "creator_id", "name", "description", "creation_date", "github_link");
+  }
+
+  public function getMods() {
+    $query = $this->db->prepare('select * from mods');
+    $result = $this->executeQuery($query);
+    return $result;
   }
 
   public function getModsByGame($game_id) {
