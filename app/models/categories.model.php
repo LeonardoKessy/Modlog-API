@@ -6,13 +6,11 @@ class categoriesModel extends Model {
   public function __construct() {
     parent::__construct();
     $this->table = "categories";
-    $this->fields = array("id", "id_game", "name");
-  }
-
-  public function create($data) {
-    extract($data);
-    $query = $this->db->prepare("INSERT INTO categories(name, id_game) VALUES (:name, :id_game)");
-    $this->executeQueryWithParams($query, [':name' => $name, ':id_game' => $game]);
+    $this->fields = array(
+      "id" => false, 
+      "id_game" => true, 
+      "name" => true
+    );
   }
 
   public function update($data) {

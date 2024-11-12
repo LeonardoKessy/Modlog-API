@@ -7,12 +7,12 @@ class Request {
 
     public function __construct() {
         try {
-            $this->body = json_decode(file_get_contents('php://input'));
+            $json = file_get_contents('php://input');
+            $this->body = json_decode($json);
         }
-        catch (Exception $e) {
+        catch (Error $e) {
             $this->body = null;
         }
         $this->query = (object) $_GET;
     }
-
 }

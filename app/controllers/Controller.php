@@ -13,9 +13,9 @@ class Controller {
 
     public function getAll($req, $res) {
 
-        $orderBy = false;
-        if(isset($req->query->orderBy))
-            $orderBy = $req->query->orderBy;
+        $sort = false;
+        if(isset($req->query->sort))
+            $sort = $req->query->sort;
 
         $order = false;
         if(isset($req->query->order))
@@ -23,8 +23,8 @@ class Controller {
 
         $wheres = [];
         foreach ($this->model->fields as $key => $value) {
-            if (array_key_exists($value, (array) $req->query)) {
-                $wheres[$value] = $req->query->$value;
+            if (array_key_exists($key, (array) $req->query)) {
+                $wheres[$key] = $req->query->$key;
             }
         }
 
@@ -36,16 +36,33 @@ class Controller {
             $limit = $req->query->limit;
 
 
-        $results = $this->model->getAll($orderBy, $order, $wheres, $page, $limit);
-        if (!empty($results)) 
-            $this->view->response($results);
+        $results = $this->model->getAll($sort, $order, $wheres, $page, $limit);
+        if (!$results) 
+            return $this->view->response("No data found with this criteria...", 404);
+        $this->view->response($results);
     }
 
     public function get($req, $res) {
-        if (!empty($req->params->id)) {
-            $result = $this->model->get($req->params->id);
-            if (!empty($result)) 
-                $this->view->response($result);
+        $id = $req->params->id;
+        $result = $this->model->get($id);
+        if (!$result) 
+            return $this->view->response("No element with id $id in DB.", 404);
+
+        $this->view->response($result);
+    }
+
+    public function create($req, $res) {
+        $values = [];
+        foreach ($this->model->fields as $key => $value) {
+            if (array_key_exists($key, (array) $req->body)) {
+                $values[$key] = $req->body->$key;
+            }
         }
+
+        $result = $this->model->create($values);
+        if ($result)
+            $this->view->response("Created succesfully.");
+        else 
+            $this->view->response("Required fields are missing.", 400);
     }
 }

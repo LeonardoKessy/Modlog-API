@@ -6,14 +6,15 @@ class gamesModel extends Model {
   public function __construct() {
     parent::__construct();
     $this->table = "games";
-    $this->fields = array("id", "name", "description", "image");
+    $this->fields = array(
+      "id" => false, 
+      "name" => true, 
+      "description" => false, 
+      "image" => false
+    );
   }
 
-  public function create($data) {
-    extract($data);
-    $query = $this->db->prepare("INSERT INTO games(name, description, image) VALUES (:name, :description, :image)");
-    $this->executeQueryWithParams($query, [':name' => $name, ':description' => $description, ':image' => $image ?? null]);
-  }
+
 
   public function update($data) {
     extract($data);

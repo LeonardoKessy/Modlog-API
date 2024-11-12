@@ -6,14 +6,11 @@ class creatorsModel extends Model {
   public function __construct() {
     parent::__construct();
     $this->table = "creators";
-    $this->fields = array("id", "name", "profile_link");
-  }
-
-
-  public function create($data) {
-    extract($data);
-    $query = $this->db->prepare("INSERT INTO creators(name, profile_link) VALUES (:name, :link)");
-    $this->executeQueryWithParams($query, [':name' => $name, ':link' => $link]);
+    $this->fields = array(
+      "id" => false, 
+      "name" => true, 
+      "profile_link" => true
+    );
   }
 
   public function update($data) {

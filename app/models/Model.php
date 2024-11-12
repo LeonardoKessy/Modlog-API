@@ -3,7 +3,7 @@
 class Model {
   protected $db;
   public $table = "";
-  public $fields = [];
+  public $fields = []; // Fieldname<String> => Required<Boolean>
 
   public function __construct() {
     try {
@@ -14,7 +14,7 @@ class Model {
     $this->deploy();
   }
 
-  public function getAll($orderBy = false, $order = false, $wheres =[], $page = 1, $limit = 0) {  
+  public function getAll($sort = false, $order = false, $wheres =[], $page = 1, $limit = 0) {  
     $sql = "SELECT * FROM $this->table";
 
     $isFirst = true;
@@ -24,9 +24,9 @@ class Model {
       $sql .= "$key = '$value'";
       $isFirst = false;
     }
-
-    if (in_array($orderBy, $this->fields)) { 
-      $sql .= " ORDER BY $orderBy ";
+    
+    if (key_exists($sort, $this->fields)) { 
+      $sql .= " ORDER BY $sort ";
       switch ($order) {
         case 'DESC': $sql .='DESC'; break;
         default: $sql .= 'ASC'; break;
@@ -49,6 +49,26 @@ class Model {
     $query = $this->executeQuery($sql);
     $result = $query->fetch(PDO::FETCH_OBJ);
     return $result;
+  }
+
+  public function create($values = []) {
+    $sql = "INSERT INTO $this->table(";
+    $insertFields = "";
+    $insertValues = ") VALUES (";
+    foreach ($this->fields as $key => $value) {
+      if ($value == true && !key_exists($key, $values))
+        return false;
+
+      if (key_exists($key, $values)) {
+        $insertFields .= $key . ", ";
+        $insertValues .= "'" . $values[$key] . "', ";
+      }
+    }
+
+    $sql .= trim($insertFields, ', ') . trim($insertValues, ', ') . ")";
+
+    $this->executeQuery($sql);
+    return true;
   }
 
 

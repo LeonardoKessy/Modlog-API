@@ -6,13 +6,18 @@ class modsModel extends Model {
   public function __construct() {
     parent::__construct();
     $this->table = "mods";
-    $this->fields = array("id", "game_id", "category_id", "creator_id", "name", "description", "creation_date", "github_link");
-  }
-
-  public function create($data) {
-    extract($data);
-    $query = $this->db->prepare("INSERT INTO mods(game_id, category_id, creator_id, name, description, creation_date, github_link, download_link, image) VALUES (:game, :category, :creator, :name, :description, :creation_date, :github_link, :download_link, :image)");
-    $this->executeQueryWithParams($query, [':game' => $game, ':category' => $category, ':creator' => $creator, ':name' => $name, ':description' => $description, ':creation_date' => $creation_date, ':github_link' => $github_link, ':download_link' => $download_link, ':image' => $image ?? null]);
+    $this->fields = array(
+      "id" => false, 
+      "game_id" => true, 
+      "category_id" => true, 
+      "creator_id" => true, 
+      "name" => true, 
+      "description" => false, 
+      "creation_date" => true, 
+      "github_link" => false, 
+      "download_link" => true, 
+      "image" => false
+    );
   }
 
   public function update($data) {

@@ -24,5 +24,4 @@ class JSONView{
         
         return $status[$code];
     }
-
 }

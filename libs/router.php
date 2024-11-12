@@ -47,10 +47,7 @@ class Route {
    
     (new $controller())->$method($request, $response);
   }
-
-
 }
-
 
 class Router {
   private $routeTable = [];
