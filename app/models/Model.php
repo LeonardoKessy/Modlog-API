@@ -58,7 +58,9 @@ class Model {
     foreach ($this->fields as $key => $value) {
       if ($value == true && !key_exists($key, $values))
         return false;
-
+      
+      if ($key == 'id') continue;
+      
       if (key_exists($key, $values)) {
         $insertFields .= $key . ", ";
         $insertValues .= "'" . $values[$key] . "', ";
@@ -71,6 +73,28 @@ class Model {
     return true;
   }
 
+  public function patch($values = []) {
+    if (!key_exists('id', $values))
+      return false;
+
+    $sql = "UPDATE $this->table SET ";
+    foreach ($this->fields as $key => $value) {
+      if ($key == 'id') continue;
+      if (key_exists($key, $values)) {
+        $sql .= "$key='$values[$key]' ";
+      }
+    }
+    $sql .= "WHERE id = '$values[id]'";
+
+    $this->executeQuery($sql);
+    return true;
+  }
+
+  public function delete($id) {
+    $sql = "DELETE FROM $this->table WHERE id = '$id'";
+    
+    $this->executeQuery($sql);
+  }  
 
   public function executeQuery($sql) {
     $query = $this->db->prepare($sql);

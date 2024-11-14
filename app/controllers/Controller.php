@@ -13,20 +13,14 @@ class Controller {
 
     public function getAll($req, $res) {
 
-        $sort = false;
-        if(isset($req->query->sort))
-            $sort = $req->query->sort;
+        $sort = $req->query->sort ?? false;
 
-        $order = false;
-        if(isset($req->query->order))
-            $order = $req->query->order;
+        $order = $req->query->order ?? false;
 
         $wheres = [];
-        foreach ($this->model->fields as $key => $value) {
-            if (array_key_exists($key, (array) $req->query)) {
+        foreach ($this->model->fields as $key => $value) 
+            if (array_key_exists($key, (array) $req->query)) 
                 $wheres[$key] = $req->query->$key;
-            }
-        }
 
         $page = 1;
         if(isset($req->query->page)) 
@@ -52,6 +46,9 @@ class Controller {
     }
 
     public function create($req, $res) {
+        if (!checkAdmin($res))
+            return $this->view->response('Access denied.', 403);
+
         $values = [];
         foreach ($this->model->fields as $key => $value) {
             if (array_key_exists($key, (array) $req->body)) {
@@ -64,5 +61,33 @@ class Controller {
             $this->view->response("Created succesfully.");
         else 
             $this->view->response("Required fields are missing.", 400);
+    }
+
+    public function patch($req, $res) {
+        if (!checkAdmin($res))
+            return $this->view->response('Access denied.', 403);
+
+        $values = [];
+        foreach ($this->model->fields as $key => $value) {
+            if (array_key_exists($key, (array) $req->body)) {
+                $values[$key] = $req->body->$key;
+            }
+        }
+
+        $result = $this->model->patch($values);
+        if ($result)
+            $this->view->response("Modified succesfully.");
+        else 
+            $this->view->response("No element with id " . $values['id'] ." found in DB.", 400);
+    }
+
+    public function delete($req, $res) {
+        if (!checkAdmin($res))
+            return $this->view->response('Access denied.', 403);
+        
+        $id = $req->params->id;
+        $this->model->delete($id);
+        
+        return $this->view->response("Deleted succesfully.");
     }
 }

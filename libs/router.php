@@ -73,6 +73,7 @@ class Router {
               return;
           }
       }
+      
       if ($this->defaultRoute !== null)
           $this->defaultRoute->run($this->request, $this->response);
   }
