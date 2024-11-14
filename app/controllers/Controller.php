@@ -22,12 +22,9 @@ class Controller {
             if (array_key_exists($key, (array) $req->query)) 
                 $wheres[$key] = $req->query->$key;
 
-        $page = 1;
-        if(isset($req->query->page)) 
-            $page = $req->query->page;
-        $limit = 0;
-        if(isset($req->query->limit))
-            $limit = $req->query->limit;
+        $page = $req->query->page ?? 0;
+
+        $limit = $req->query->limit ?? 0;
 
 
         $results = $this->model->getAll($sort, $order, $wheres, $page, $limit);
@@ -50,11 +47,9 @@ class Controller {
             return $this->view->response('Access denied.', 403);
 
         $values = [];
-        foreach ($this->model->fields as $key => $value) {
-            if (array_key_exists($key, (array) $req->body)) {
+        foreach ($this->model->fields as $key => $value) 
+            if (array_key_exists($key, (array) $req->body)) 
                 $values[$key] = $req->body->$key;
-            }
-        }
 
         $result = $this->model->create($values);
         if ($result)
@@ -68,11 +63,9 @@ class Controller {
             return $this->view->response('Access denied.', 403);
 
         $values = [];
-        foreach ($this->model->fields as $key => $value) {
-            if (array_key_exists($key, (array) $req->body)) {
+        foreach ($this->model->fields as $key => $value) 
+            if (array_key_exists($key, (array) $req->body)) 
                 $values[$key] = $req->body->$key;
-            }
-        }
 
         $result = $this->model->patch($values);
         if ($result)
