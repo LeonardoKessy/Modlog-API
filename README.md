@@ -1,27 +1,90 @@
 # Modlog
-Catalogo de mods | Projecto TUDAI Web 2
+## Catalogo de mods | Projecto TUDAI Web 2
 
 Modlog es un catalogo de mods de videojuegos, que categoriza y provee links de acceso a las distintas creaciones.
 ¿Que es un mod? Un mod, proveniente de "modificación". Es un contenido o cambio aplicado a un juego creado por fans del mismo, usualmente programado en el lenguaje base de este.
 
 
-![Diagrama conexiones](https://github.com/lucalis023/Modlog/blob/main/diagramaRelaciones.jfif?raw=true)
+## Tabla de contenidos:
+- [Modlog](#modlog)
+- [Cargar Sitio](#como-cargar-el-sitio)
+- [Usuarios](#usuarios)
+- [Endpoints](#endpoints)
 
 
 
-Como cargar el sitio:
 
+
+---
+
+## Como cargar el sitio:
 - Clonar el repositorio y colocar la carpeta "Modlog" en "xampp/htdocs/". 
-- Abrir el sitio en "localhost/Modlog" 
+- Hacer request a cualquier endpoint. Se ejecuta autodeploy. 
 
-En caso de no cargar las imagenes, checkear el archivo de configuracion de apache (httpd.conf) y asegurarse de que en la primer ocurrencia de <Directory /> aparezca tal que:
+---
 
-![httpd.conf ejemplo](https://github.com/lucalis023/Modlog/blob/main/httpdExample.png?raw=true)
-
-User sin permisos:
+## Usuarios
+#### User sin permisos:
 - Email: user@gmail.com
 - Password: user
 
-User con permisos:
+#### User con permisos:
 - Email: admin@gmail.com
 - Password: admin
+
+---
+
+## Endpoints
+*Cualquier campo no perteneciente a la tabla llamada sera ignorado. POST no necesita obligatoriamente los campos opcionales.*
+
+#### Games
+Campos: id(int), name(varchar), description(varchar), image(varchar)
+*description e image pueden ser null.*
+| Metodo    | URI                             |
+|-----------|---------------------------------|
+| GET       | locahost/Modlog/api/games       |
+| GET       | locahost/Modlog/api/games/:id   |
+| POST      | locahost/Modlog/api/games       | 
+| PATCH     | locahost/Modlog/api/games       | 
+| DELETE    | locahost/Modlog/api/games/:id   | 
+
+*POST Example:*
+{
+  "name": "New Game",
+  "description": "New Description"
+}
+
+
+#### Categories
+Campos: id(int), id_game(int), name(varchar)
+| Metodo    | URI                                |
+|-----------|------------------------------------|
+| GET       | locahost/Modlog/api/category       |
+| GET       | locahost/Modlog/api/category/:id   |
+| POST      | locahost/Modlog/api/category       | 
+| PATCH     | locahost/Modlog/api/category       | 
+| DELETE    | locahost/Modlog/api/category/:id   | 
+
+
+*POST Example:*
+{
+  "id_game": 1,
+  "name": "New Category"
+}
+
+
+#### Creators
+Campos: id(int), name(varchar), profile_link(varchar)
+| Metodo    | URI                                |
+|-----------|------------------------------------|
+| GET       | locahost/Modlog/api/creators       |
+| GET       | locahost/Modlog/api/creators/:id   |
+| POST      | locahost/Modlog/api/creators       | 
+| PATCH     | locahost/Modlog/api/creators       | 
+| DELETE    | locahost/Modlog/api/creators/:id   | 
+
+*POST Example:*
+{
+  "name": "Creator",
+  "profile_link": "www.github.com"
+}

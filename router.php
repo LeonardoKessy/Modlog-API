@@ -39,7 +39,7 @@ $router->addRoute('creators/:id', 'DELETE', 'creatorsController', 'delete');
 $router->addRoute('mods', 'GET', 'modsController', 'getAll');
 $router->addRoute('mods/:id', 'GET', 'modsController', 'get');
 $router->addRoute('mods', 'POST', 'modsController', 'create');
-$router->addRoute('creators', 'PATCH', 'creatorsController', 'patch');
+$router->addRoute('mods', 'PATCH', 'modsController', 'patch');
 $router->addRoute('mods/:id', 'DELETE', 'modsController', 'delete');
 
 $router->addRoute('users/register', 'POST', 'authController', 'register');

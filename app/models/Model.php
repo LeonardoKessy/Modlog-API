@@ -80,9 +80,8 @@ class Model {
     $sql = "UPDATE $this->table SET ";
     foreach ($this->fields as $key => $value) {
       if ($key == 'id') continue;
-      if (key_exists($key, $values)) {
+      if (key_exists($key, $values)) 
         $sql .= "$key='$values[$key]' ";
-      }
     }
     $sql .= "WHERE id = '$values[id]'";
 
@@ -122,11 +121,9 @@ class Model {
     if (count($tables) == 0) {
       $sql = file_get_contents('./modlog.sql');
       $sqlStatements = explode(";", $sql); 
-      foreach ($sqlStatements as $statement) {
-        if (trim($statement) != "") {
+      foreach ($sqlStatements as $statement) 
+        if (trim($statement) != "") 
             $this->db->exec($statement);
-        }
-      }
     }
   }
 }
