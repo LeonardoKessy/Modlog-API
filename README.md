@@ -153,6 +153,7 @@ Necesario para llamados a funciones de POST, PATCH y DELETE.
   - Esto devuelve un token JWT en el cuerpo de la respuesta.
 - Cambiar el tipo de Authorization a "Bearer Token"
 - Ingresar el token recibido (*sin comillas*)
-- Listo. Mientras este seteado el token, el usuario se va a mantener.
+- Mientras este token este seteado, se conservan las credenciales de usuario.
   - Tener en cuenta que solo un usuario administrador puede utilizar POST, PATCH, y DELETE.
+  - El token generado tiene duracion de una hora.
 
