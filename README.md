@@ -46,6 +46,7 @@ API REST de Modlog.
 ### Games
 #### Campos: 
 **id**(int), name(varchar), description(varchar), image(varchar)
+
 *description e image pueden ser null.*
 | Metodo    | URI                              |
 |-----------|----------------------------------|
@@ -85,6 +86,7 @@ API REST de Modlog.
 ### Mods
 #### Campos: 
 **id**(int), *game_id*(int), *category_id*(int), *creator_id*(int), name(varchar), description(varchar), creation_date(date), github_link(varchar), download_link(varchar), image(varchar)
+
 *description, github_link e image pueden ser null.*
 | Metodo    | URI                             |
 |-----------|---------------------------------|
