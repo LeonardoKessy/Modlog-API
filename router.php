@@ -42,7 +42,7 @@ $router->addRoute('mods', 'POST', 'modsController', 'create');
 $router->addRoute('mods', 'PATCH', 'modsController', 'patch');
 $router->addRoute('mods/:id', 'DELETE', 'modsController', 'delete');
 
-$router->addRoute('users/register', 'POST', 'authController', 'register');
+$router->addRoute('users', 'POST', 'authController', 'register');
 $router->addRoute('users/token', 'GET', 'authController', 'getToken');
 
 
