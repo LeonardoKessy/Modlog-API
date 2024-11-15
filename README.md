@@ -3,7 +3,6 @@
 
 API REST de Modlog.
 
-
 ## Tabla de contenidos:
 - [Modlog](#modlog)
 - [Cargar Sitio](#como-cargar-el-sitio)
@@ -18,16 +17,13 @@ API REST de Modlog.
 
 
 
-
----
-
 ## Como cargar el sitio:
 - Clonar el repositorio y colocar la carpeta "Modlog" en "xampp/htdocs/". 
 - Asegurarse de tener Apache y MySQL activos en xampp.
 - En caso de utilizar Postman: Asegurarse de abrir Postman Agent para utilizar localhost.
 - Hacer request a cualquier endpoint. Se ejecuta autodeploy de ser necesario. 
 
----
+
 
 ## Usuarios
 #### User sin permisos:
@@ -38,7 +34,7 @@ API REST de Modlog.
 - Email: admin@gmail.com
 - Password: admin
 
----
+
 
 ## Endpoints
 *Cualquier campo no perteneciente a la tabla llamada sera ignorado. POST no necesita obligatoriamente los campos opcionales.*
