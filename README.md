@@ -44,9 +44,6 @@ API REST de Modlog.
 *Cualquier campo no perteneciente a la tabla llamada sera ignorado. POST no necesita obligatoriamente los campos opcionales.*
 
 
-
-
-
 ### Games
 #### Campos: 
 **id**(int), name(varchar), description(varchar), image(varchar)
@@ -66,9 +63,7 @@ API REST de Modlog.
   "description": "New Description"
 }
 
-
-
-
+---
 
 ### Categories
 #### Campos: 
@@ -87,9 +82,7 @@ API REST de Modlog.
   "name": "New Category"
 }
 
-
-
-
+---
 
 ### Mods
 #### Campos: 
@@ -115,9 +108,7 @@ API REST de Modlog.
   "download_link": "www.link.com"
 }
 
-
-
-
+---
 
 ### Creators
 #### Campos: 
@@ -136,9 +127,7 @@ API REST de Modlog.
   "profile_link": "www.github.com"
 }
 
-
-
-
+---
 
 ### Users
 Campos: **id**(int), username(varchar), email(varchar), password(varchar)
