@@ -43,6 +43,7 @@ API REST de Modlog.
 ## Endpoints
 *Cualquier campo no perteneciente a la tabla llamada sera ignorado. POST no necesita obligatoriamente los campos opcionales.*
 
+---
 
 ### Games
 #### Campos: 
