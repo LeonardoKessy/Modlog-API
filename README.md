@@ -12,7 +12,7 @@ Modlog es un catalogo de mods de videojuegos, que categoriza y provee links de a
 - [Endpoints](#endpoints)
   - [Games](#games)
   - [Categories](#categories)
-  - [Games](#games)
+  - [Mods](#mods)
   - [Creators](#creators)
 
 
@@ -82,13 +82,13 @@ Campos: **id**(int), *id_game*(int), name(varchar)
 #### Mods
 Campos: **id**(int), *game_id*(int), *category_id*(int), *creator_id*(int), name(varchar), description(varchar), creation_date(date), github_link(varchar), download_link(varchar), image(varchar)
 *description e image pueden ser null.*
-| Metodo    | URI                              |
-|-----------|----------------------------------|
-| GET       | localhost/Modlog/api/games       |
-| GET       | localhost/Modlog/api/games/:id   |
-| POST      | localhost/Modlog/api/games       | 
-| PATCH     | localhost/Modlog/api/games       | 
-| DELETE    | localhost/Modlog/api/games/:id   | 
+| Metodo    | URI                             |
+|-----------|---------------------------------|
+| GET       | localhost/Modlog/api/mods       |
+| GET       | localhost/Modlog/api/mods/:id   |
+| POST      | localhost/Modlog/api/mods       | 
+| PATCH     | localhost/Modlog/api/mods       | 
+| DELETE    | localhost/Modlog/api/mods/:id   | 
 
 *POST Example:*
 {
