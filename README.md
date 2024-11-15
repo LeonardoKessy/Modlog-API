@@ -10,6 +10,10 @@ Modlog es un catalogo de mods de videojuegos, que categoriza y provee links de a
 - [Cargar Sitio](#como-cargar-el-sitio)
 - [Usuarios](#usuarios)
 - [Endpoints](#endpoints)
+  - [Games](#games)
+  - [Categories](#categories)
+  - [Games](#games)
+  - [Creators](#creators)
 
 
 
@@ -38,15 +42,15 @@ Modlog es un catalogo de mods de videojuegos, que categoriza y provee links de a
 *Cualquier campo no perteneciente a la tabla llamada sera ignorado. POST no necesita obligatoriamente los campos opcionales.*
 
 #### Games
-Campos: id(int), name(varchar), description(varchar), image(varchar)
+Campos: **id**(int), name(varchar), description(varchar), image(varchar)
 *description e image pueden ser null.*
-| Metodo    | URI                             |
-|-----------|---------------------------------|
-| GET       | locahost/Modlog/api/games       |
-| GET       | locahost/Modlog/api/games/:id   |
-| POST      | locahost/Modlog/api/games       | 
-| PATCH     | locahost/Modlog/api/games       | 
-| DELETE    | locahost/Modlog/api/games/:id   | 
+| Metodo    | URI                              |
+|-----------|----------------------------------|
+| GET       | localhost/Modlog/api/games       |
+| GET       | localhost/Modlog/api/games/:id   |
+| POST      | localhost/Modlog/api/games       | 
+| PATCH     | localhost/Modlog/api/games       | 
+| DELETE    | localhost/Modlog/api/games/:id   | 
 
 *POST Example:*
 {
@@ -55,15 +59,16 @@ Campos: id(int), name(varchar), description(varchar), image(varchar)
 }
 
 
+
 #### Categories
-Campos: id(int), id_game(int), name(varchar)
-| Metodo    | URI                                |
-|-----------|------------------------------------|
-| GET       | locahost/Modlog/api/category       |
-| GET       | locahost/Modlog/api/category/:id   |
-| POST      | locahost/Modlog/api/category       | 
-| PATCH     | locahost/Modlog/api/category       | 
-| DELETE    | locahost/Modlog/api/category/:id   | 
+Campos: **id**(int), *id_game*(int), name(varchar)
+| Metodo    | URI                                 |
+|-----------|-------------------------------------|
+| GET       | localhost/Modlog/api/category       |
+| GET       | localhost/Modlog/api/category/:id   |
+| POST      | localhost/Modlog/api/category       | 
+| PATCH     | localhost/Modlog/api/category       | 
+| DELETE    | localhost/Modlog/api/category/:id   | 
 
 
 *POST Example:*
@@ -73,15 +78,40 @@ Campos: id(int), id_game(int), name(varchar)
 }
 
 
+
+#### Mods
+Campos: **id**(int), *game_id*(int), *category_id*(int), *creator_id*(int), name(varchar), description(varchar), creation_date(date), github_link(varchar), download_link(varchar), image(varchar)
+*description e image pueden ser null.*
+| Metodo    | URI                              |
+|-----------|----------------------------------|
+| GET       | localhost/Modlog/api/games       |
+| GET       | localhost/Modlog/api/games/:id   |
+| POST      | localhost/Modlog/api/games       | 
+| PATCH     | localhost/Modlog/api/games       | 
+| DELETE    | localhost/Modlog/api/games/:id   | 
+
+*POST Example:*
+{
+  "game_id": 1,
+  "category_id": 1,
+  "creator_id": 1,
+  "name": "New Game",
+  "description": "New Description"
+  "creation_date": "2024-11-17",
+  "download_link": "www.link.com"
+}
+
+
+
 #### Creators
-Campos: id(int), name(varchar), profile_link(varchar)
-| Metodo    | URI                                |
-|-----------|------------------------------------|
-| GET       | locahost/Modlog/api/creators       |
-| GET       | locahost/Modlog/api/creators/:id   |
-| POST      | locahost/Modlog/api/creators       | 
-| PATCH     | locahost/Modlog/api/creators       | 
-| DELETE    | locahost/Modlog/api/creators/:id   | 
+Campos: **id**(int), name(varchar), profile_link(varchar)
+| Metodo    | URI                                 |
+|-----------|-------------------------------------|
+| GET       | localhost/Modlog/api/creators       |
+| GET       | localhost/Modlog/api/creators/:id   |
+| POST      | localhost/Modlog/api/creators       | 
+| PATCH     | localhost/Modlog/api/creators       | 
+| DELETE    | localhost/Modlog/api/creators/:id   | 
 
 *POST Example:*
 {
